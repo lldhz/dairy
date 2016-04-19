@@ -88,7 +88,7 @@ public class AliyunService implements OperateService{
         }
         catch (Exception e)
         {
-            logger.error(e);
+            logger.debug(e);
             logger.error("AliyunService:get propertise Failed!!!");
         }
     }
@@ -111,6 +111,8 @@ public class AliyunService implements OperateService{
                 catch (ClientException e)
                 {
                     roleResponse = null;
+                    logger.error("AliyunService:STS Service Failed!!!");
+                    logger.debug(e);
                     innerData.setCode(messageLoader.getProperty("200003.code"));
                     innerData.setComment(messageLoader.getProperty("200003.desp"));
                 }
@@ -138,25 +140,7 @@ public class AliyunService implements OperateService{
     {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
-        return dir+"/"+sdf.format(date)+"."+getContentType(fileType);
-    }
-
-    private String getContentType(String fileType)
-    {
-        if(fileType.toLowerCase().equals("bmp")){return "image/bmp";}
-        if(fileType.toLowerCase().equals("gif")){return "image/gif";}
-        if(fileType.toLowerCase().equals("jpeg")||
-                fileType.toLowerCase().equals("jpg")||
-                fileType.toLowerCase().equals("png")){return "image/jpeg";}
-        if(fileType.toLowerCase().equals("html")){return "text/html";}
-        if(fileType.toLowerCase().equals("txt")){return "text/plain";}
-        if(fileType.toLowerCase().equals("vsd")){return "application/vnd.visio";}
-        if(fileType.toLowerCase().equals("pptx")||
-                fileType.toLowerCase().equals("ppt")){return "application/vnd.ms-powerpoint";}
-        if(fileType.toLowerCase().equals("docx")||
-                fileType.toLowerCase().equals("doc")){return "application/msword";}
-        if(fileType.toLowerCase().equals("xml")){return "text/xml";}
-        return "text/html";
+        return dir+"/"+sdf.format(date)+"."+fileType;
     }
 
     private AssumeRoleResponse assumeRole(String accessKeyId, String accessKeySecret,
