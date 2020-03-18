@@ -13,7 +13,7 @@
         <jdk.version>1.8</jdk.version>
         <spring.version>4.2.5.RELEASE</spring.version>
         <spring.security.version>3.2.5</spring.security.version>
-        <spring.security.oauth2.version>2.0.9.RELEASE</spring.security.oauth2.version>
+        <spring.security.oauth2.version>2.0.18.RELEASE</spring.security.oauth2.version>
     </properties>
 
     <dependencies>
